@@ -3,7 +3,10 @@ defmodule PhxBookStore.Sellers.Seller do
   import Ecto.Changeset
 
   schema "sellers" do
-
+    field :name, :string
+    field :contact_number, :string
+    field :email, :string
+    field :role, :string
 
     timestamps(type: :utc_datetime)
   end
