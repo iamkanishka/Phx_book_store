@@ -48,7 +48,7 @@ defmodule PhxBookStore.Repo.Migrations.CreateTables do
       timestamps(type: :utc_datetime)
     end
 
-    create table(:book_stores) do
+    create table(:books_stores) do
       add :name, :string
       add :address, :string
       add :city, :string
