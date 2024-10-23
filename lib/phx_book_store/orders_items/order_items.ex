@@ -7,7 +7,7 @@ defmodule PhxBookStore.OrdersItems.OrderItems do
 
   schema "order_items" do
     field :quantity, :integer
-    field :price, :float
+    field :price, :integer
     has_many :books, Book
     has_many :book_stores,BookStore
 

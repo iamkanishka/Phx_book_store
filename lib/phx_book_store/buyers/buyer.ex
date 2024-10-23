@@ -12,7 +12,6 @@ defmodule PhxBookStore.Buyers.Buyer do
     field :state, :string
     field :zip_code, :string
 
-    has_many :books, Book
     has_many :orders, Order
    timestamps(type: :utc_datetime)
   end

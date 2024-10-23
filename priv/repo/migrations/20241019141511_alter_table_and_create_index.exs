@@ -3,11 +3,10 @@ defmodule PhxBookStore.Repo.Migrations.AlterTableAndCreateIndex do
 
   def change do
     alter table(:buyers) do
-      add :order_id, references(:orders, on_delete: :nothing)
     end
 
     alter table(:sellers) do
-      add :book_store_id, references(:book_stores, on_delete: :nothing)
+      add :books_store_id, references(:books_stores, on_delete: :nothing)
     end
 
     alter table(:authors) do
@@ -16,7 +15,6 @@ defmodule PhxBookStore.Repo.Migrations.AlterTableAndCreateIndex do
     end
 
     alter table(:orders) do
-      add :buyer_id, references(:buyers, on_delete: :nothing)
       add :order_item_id, references(:order_items, on_delete: :nothing)
     end
 
