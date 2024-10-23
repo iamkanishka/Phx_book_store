@@ -5,7 +5,7 @@ defmodule PhxBookStore.Orders.Order do
 
   schema "orders" do
     field :status, :string
-    field :total_amount, :float
+    field :total_amount, :integer
     field :currency, :string
     field :stripe_charge_id, :string
     field :stripe_payment_intent_id, :string

@@ -4,6 +4,7 @@ defmodule PhxBookStore.BookStores.BookStore do
 
   alias PhxBookStore.Sellers.Seller
   alias PhxBookStore.Books.Book
+  alias PhxBookStore.Buyers.Buyer
 
   schema "books_stores" do
     field :name, :string
@@ -12,8 +13,9 @@ defmodule PhxBookStore.BookStores.BookStore do
     field :state, :string
     field :zip_code, :string
 
-    has_one :seller, Seller
-  many_to_many :books, Book, join_through: "books_bookstores"
+    belongs_to :seller, Seller
+    many_to_many :books, Book, join_through: "books_bookstores"
+
 
     timestamps(type: :utc_datetime)
   end
@@ -21,7 +23,7 @@ defmodule PhxBookStore.BookStores.BookStore do
   @doc false
   def changeset(book_store, attrs) do
     book_store
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs, [:name, :address, :city, :state, :zip_code, :seller_id])
+    |> validate_required([:name, :address, :city, :state, :zip_code, :seller_id])
   end
 end
