@@ -11,18 +11,16 @@ defmodule PhxBookStore.Repo.Migrations.AlterTableAndCreateIndex do
     alter table(:author_commisions) do
     end
 
+    alter table(:books) do
+    end
 
     alter table(:book_stores) do
       add :seller_id, references(:sellers, on_delete: :delete_all)
-   end
-
-
+    end
 
     alter table(:sellers) do
       add :books_store_id, references(:books_stores, on_delete: :nothing)
     end
-
-
 
     alter table(:orders) do
       add :order_item_id, references(:order_items, on_delete: :nothing)
@@ -34,14 +32,6 @@ defmodule PhxBookStore.Repo.Migrations.AlterTableAndCreateIndex do
       add :book_store_id, references(:book_stores, on_delete: :nothing)
       add :order_id, references(:orders, on_delete: :nothing)
     end
-
-
-
-    alter table(:books) do
-      add :author_id, references(:authors, on_delete: :nothing)
-    end
-
-
 
     # Author_commisions
 

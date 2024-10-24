@@ -17,6 +17,7 @@ defmodule PhxBookStore.AuthorCommisions.AuthorCommision do
     author_commision
     |> cast(attrs, [:commission_amount, :book_id, :author_id])
     |> validate_required([:commission_amount, :book_id, :author_id])
+    |> validate_number(:commission_amount, [greater_than_or_equal_to: 0])
     |> assoc_constraint(:book_id)
     |> assoc_constraint(:author_id)
     |> unique_constraint(:book_id)
