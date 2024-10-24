@@ -18,8 +18,6 @@ defmodule PhxBookStore.Repo.Migrations.CreateTables do
       add :name, :string
       add :contact_number, :string
       add :email, :string
-      add :role, :string
-
       timestamps(type: :utc_datetime)
     end
 
@@ -28,6 +26,32 @@ defmodule PhxBookStore.Repo.Migrations.CreateTables do
       add :last_name, :string
       add :biography, :string
 
+      timestamps(type: :utc_datetime)
+    end
+
+    create table(:author_commisions) do
+      add :commission_amount, :integer
+      add :author_id, references(:authors, on_delete: :delete_all)
+      add :book_id, references(:books, on_delete: :delete_all)
+      timestamps(type: :utc_datetime)
+    end
+
+    create table(:books) do
+      add :title, :string
+      add :isbn, :string
+      add :price, :integer
+      add :description, :string
+      add :thumbnail, :string
+      add :published_on, :date
+      timestamps(type: :utc_datetime)
+    end
+
+    create table(:books_stores) do
+      add :name, :string
+      add :address, :string
+      add :city, :string
+      add :state, :string
+      add :zip_code, :string
       timestamps(type: :utc_datetime)
     end
 
@@ -48,30 +72,6 @@ defmodule PhxBookStore.Repo.Migrations.CreateTables do
       timestamps(type: :utc_datetime)
     end
 
-    create table(:books_stores) do
-      add :name, :string
-      add :address, :string
-      add :city, :string
-      add :state, :string
-      add :zip_code, :string
-      timestamps(type: :utc_datetime)
-    end
-
-    create table(:books) do
-      add :title, :string
-      add :isbn, :string
-      add :price, :integer
-      add :description, :string
-      add :thumbnail, :string
-      add :published_on, :date
-      timestamps(type: :utc_datetime)
-    end
-
-    create table(:author_commisions) do
-      add :commission_amount, :integer
-      timestamps(type: :utc_datetime)
-    end
-
     create table(:authors_books, primary_key: false) do
       add :author_id, references(:authors, on_delete: :delete_all)
       add :book_id, references(:books, on_delete: :delete_all)
@@ -81,10 +81,10 @@ defmodule PhxBookStore.Repo.Migrations.CreateTables do
 
     create table(:books_bookstores, primary_key: false) do
       add :book_id, references(:books, on_delete: :delete_all)
-      add :bookstore_id, references(:bookstores, on_delete: :delete_all)
+      add :book_store_id, references(:books_stores, on_delete: :delete_all)
     end
 
-    create unique_index(:books_bookstores, [:book_id, :bookstore_id])
+    create unique_index(:books_bookstores, [:book_id, :book_store_id])
   end
 
   # Table Drop

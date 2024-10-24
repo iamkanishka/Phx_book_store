@@ -9,7 +9,6 @@ defmodule PhxBookStore.Sellers.Seller do
     field :contact_number, :string
     field :email, :string
     field :role, :string
-
     has_one :books_store, BookStore
 
     timestamps(type: :utc_datetime)
@@ -18,7 +17,7 @@ defmodule PhxBookStore.Sellers.Seller do
   @doc false
   def changeset(seller, attrs) do
     seller
-    |> cast(attrs, [])
-    |> validate_required([])
+    |> cast(attrs,  [:name, :contact_number, :email, :role])
+    |> validate_required( [:name, :contact_number, :email, :role])
   end
 end
