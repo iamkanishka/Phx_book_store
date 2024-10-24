@@ -18,6 +18,7 @@ defmodule PhxBookStore.Books.Book do
     many_to_many :authors, BookAuthor, join_through: "authors_books"
     many_to_many :books_stores, BookBookStore, join_through: "books_bookstores"
 
+
     timestamps(type: :utc_datetime)
   end
 
