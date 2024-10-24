@@ -1,5 +1,5 @@
 defmodule PhxBookStore.Buyers.Buyer do
-  alias PhxBookStore.Books.Book
+
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -21,5 +21,6 @@ defmodule PhxBookStore.Buyers.Buyer do
     buyer
     |> cast(attrs, [:first_name, :last_name, :email, :address, :city, :state, :zip_code])
     |> validate_required([:first_name, :last_name, :email, :address, :city, :state, :zip_code])
+    |> validate_format(:email, ~r/@/)
   end
 end

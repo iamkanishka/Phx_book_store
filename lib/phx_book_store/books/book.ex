@@ -1,8 +1,10 @@
 defmodule PhxBookStore.Books.Book do
   use Ecto.Schema
   import Ecto.Changeset
-  alias PhxBookStore.Authors.Author
-  alias PhxBookStore.BookStores.BookStore
+  alias PhxBookStore.BookAuthors.BookAuthor
+  alias PhxBookStore.BookBookStore.BookBookStore
+
+
 
   schema "books" do
     field :title, :string
@@ -13,8 +15,8 @@ defmodule PhxBookStore.Books.Book do
     field :publisher, :string
     field :published_on, :date
 
-    many_to_many :authors, Author, join_through: "authors_books"
-    many_to_many :books_stores, BookStore, join_through: "books_bookstores"
+    many_to_many :authors, BookAuthor, join_through: "authors_books"
+    many_to_many :books_stores, BookBookStore, join_through: "books_bookstores"
 
     timestamps(type: :utc_datetime)
   end
@@ -26,6 +28,7 @@ defmodule PhxBookStore.Books.Book do
     book
     |> cast(attrs,  [:title, :isbn, :price, :description, :thumbnail, :publisher, :published_on])
     |> validate_required( [:title, :isbn, :price, :description, :thumbnail, :publisher, :published_on])
+    |> validate_number(:price,  [greater_than_or_equal: 0])
 
   end
 end
